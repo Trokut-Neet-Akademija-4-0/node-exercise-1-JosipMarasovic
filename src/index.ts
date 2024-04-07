@@ -4,6 +4,8 @@ import homeRoutes from './routes/homeRoutes'
 import popularRoutes from './routes/popularRoutes'
 import aboutRoute from './routes/aboutRoute'
 import blogRoutes from './routes/blogRoutes'
+import categoryRoutes from './routes/categoryRoutes'
+import productDetailRoutes from './routes/productDetailRoutes'
 
 
 
@@ -14,6 +16,9 @@ app.use('/', homeRoutes)
 app.use('/popular',popularRoutes)
 app.use('/about',aboutRoute)
 app.use('/blog',blogRoutes)
+app.use('/items',categoryRoutes)
+app.use('/productDetail',productDetailRoutes)
+
 
 
 app.listen(port, () => {
