@@ -37,7 +37,7 @@ router.put('/:id',(req:Request,res : Response) => {
     }
 })
 
-router.delete('/id',(req:Request,res : Response) => {
+router.delete('/:id',(req:Request,res : Response) => {
     const productId = req.params.id
     const deletedProduct = popularService.deleteProduct(productId)
     if(deletedProduct) {
