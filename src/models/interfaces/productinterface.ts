@@ -1,6 +1,6 @@
 
 interface Product {
-    id: string
+    id: number
     title:string
     description : string
     brand : string
