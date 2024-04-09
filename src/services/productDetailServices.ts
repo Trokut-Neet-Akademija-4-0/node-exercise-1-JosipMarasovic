@@ -1,19 +1,35 @@
-import productsDetailList from "../models/productDetailModel";
-import { IProductDetail } from "../models/interfaces/productDetailInterface";
+import Product from "../models/interfaces/productinterface";
+import products from "../models/productModel";
+import HttpError from "../utils/HttpError";
+
 
 
 class ProductDetailService{
-    private productsDetailList: IProductDetail [] = productsDetailList
+    private products: Product[] = products
 
     
-    getAllProducts() :IProductDetail[] {
-        return this.productsDetailList
+    getAllProducts() :Product[] {
+        return this.products
 
     }
     
-    getProductById(id: number): IProductDetail | undefined {
-        return this.productsDetailList.find(product => product.id === id);
-    }
+  getProductById(id: number): Product {
+    const foundProduct = this.products.find((product) => product.id === id)
+    if (!foundProduct)
+      throw new HttpError(404, `Product with id ${id} not found`)
+    return foundProduct
+  }
+  deleteProductById(id: number): Product {
+    const indexToDelete = this.products.findIndex(
+      (product) => product.id === id,
+    )
+
+    if (indexToDelete < 0)
+      throw new HttpError(404, `Product with id ${id} not found`)
+
+    const deletedProduct = this.products.splice(indexToDelete, 1)
+    return deletedProduct[0]
+  }
 
 
 

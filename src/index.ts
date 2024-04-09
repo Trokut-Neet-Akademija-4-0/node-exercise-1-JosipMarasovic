@@ -6,6 +6,8 @@ import aboutRoute from './routes/aboutRoute'
 import blogRoutes from './routes/blogRoutes'
 import categoryRoutes from './routes/categoryRoutes'
 import productDetailRoutes from './routes/productDetailRoutes'
+import errorHandler from './middlewares/errorHandler'
+import cartRoutes from './routes/cartRoutes'
 
 
 
@@ -18,6 +20,9 @@ app.use('/about',aboutRoute)
 app.use('/blog',blogRoutes)
 app.use('/items',categoryRoutes)
 app.use('/productDetail',productDetailRoutes)
+app.use('/cart',cartRoutes)
+
+app.use(errorHandler)
 
 
 
