@@ -21,7 +21,6 @@ app.use('/blog',blogRoutes)
 app.use('/items',categoryRoutes)
 app.use('/productDetail',productDetailRoutes)
 app.use('/cart',cartRoutes)
-
 app.use(errorHandler)
 
 

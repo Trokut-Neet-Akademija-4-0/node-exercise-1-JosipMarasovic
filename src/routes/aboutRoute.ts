@@ -1,13 +1,11 @@
 import express, { Request, Response } from 'express';
-import aboutService from '../services/aboutService';
+
+import getAboutContent from '../controllers/aboutController';
 
 const router = express.Router();
 
-router.get('/',(req : Request,res : Response) => {
-    const aboutContent = aboutService.getAboutContent();
-    res.send(aboutContent)
-
-})
+router.get('/',getAboutContent)
+ 
 
 
 export default router

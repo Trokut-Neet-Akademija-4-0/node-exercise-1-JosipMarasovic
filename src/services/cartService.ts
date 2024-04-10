@@ -15,14 +15,14 @@ class CartService {
     return this.cart
   }
 
-  // dodavanje produkta u kosaricu pomocu produkt id-a, uvijek uveca produkt za 1
+ 
   addProductById(id: number): ICart {
     this.changeProductQuantity(id, 1)
     this.updateCartInformation()
     return this.cart
   }
 
-  // skidanje cijelog produkta iz kosarice
+  
   deleteProductById(id: number): ICart {
     const indexToDelete = this.getCartProductIndexByProductId(id)
 
@@ -34,16 +34,13 @@ class CartService {
     return this.cart
   }
 
-  // brisanje proizvoda iz kosarice
+  
   clearCart(): ICart {
     this.cart.products = []
     this.updateCartInformation()
     return this.cart
   }
 
-  // metoda koja kreira produkt u kosarici ako ne postoji,
-  // uvecava kolicinu ako je quantityModifier pozitivan broj
-  // i smanjuje kolicinu ako je negativen, a ako je nula brise produkt iz kosarice
   changeProductQuantity(productId: number, quantityModifier: number): void {
     const product = productDetailServices.getProductById(productId)
 
@@ -64,7 +61,7 @@ class CartService {
     }
   }
 
-  // pomocna metoda koja na temelju product id-a nalazi cart product
+ 
   getCartProductByProductId(id: number): CartProduct {
     const foundCartProduct = this.cart.products.find(
       (cartProduct) => cartProduct.product.id === id,
@@ -74,7 +71,6 @@ class CartService {
     return foundCartProduct
   }
 
-  // pomocna metoda koja na temelju product id-a nalazi cart product index
   getCartProductIndexByProductId(id: number): number {
     const cartProductIndex = this.cart.products.findIndex(
       (cartProduct) => cartProduct.product.id === id,
@@ -84,8 +80,6 @@ class CartService {
     return cartProductIndex
   }
 
-  // pomocna metoda koja provjerava koji je cart product id najveci
-  // i vraca broj uvecan za 1 da bi nam bio dostupan id
   getNextAvailableCartProductId(): number {
     let greatestId = 0
     this.cart.products.forEach((cartProduct) => {
