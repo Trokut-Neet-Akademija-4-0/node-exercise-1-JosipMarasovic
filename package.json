@@ -8,6 +8,8 @@
     "lint": "eslint . --ext .ts",
     "build": "tsc",
     "dev": "node --env-file=.env --import=tsx --watch ./src/index.ts",
+    "zad1": "node --env-file=.env --import=tsx --watch ./zadatci/zad1.ts",
+    "zad2": "node --env-file=.env --import=tsx --watch ./zadatci/zad2.ts",
     "start": "node dist/index.js"
   },
   "author": "",
