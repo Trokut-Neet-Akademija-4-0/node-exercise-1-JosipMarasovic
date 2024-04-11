@@ -1,5 +1,6 @@
 import {IBlog} from '../models/interfaces/blogInterface'
 import blogData from '../models/blogModel'
+import HttpError from '../utils/HttpError'
 
 
 class BlogService {
@@ -9,8 +10,12 @@ class BlogService {
         return this.blogData
     }
 
-    getBlogById(id: number): IBlog | undefined {
-        return this.blogData.find(blog => blog.id === id);
+    getBlogById(id: number): IBlog  {
+        const foundBlog = this.blogData.find(blog => blog.id === id);
+        if (!foundBlog) {
+            throw new HttpError(404, `Blog with id ${id} not found`);
+        }
+        return foundBlog;
     }
 
     createBlog(newBlogData: IBlog): IBlog {
@@ -23,23 +28,24 @@ class BlogService {
     }
     
 
-    updateBlog(id: number, updatedBlogData: IBlog): IBlog | undefined {
+    updateBlog(id: number, updatedBlogData: IBlog): IBlog  {
         const index = this.blogData.findIndex(blog => blog.id === id);
         if (index !== -1) {
             const updatedBlog = { ...this.blogData[index], ...updatedBlogData };
             this.blogData[index] = updatedBlog;
             return updatedBlog;
         }
-        return undefined; 
+        throw new HttpError(404, `Blog with id ${id} not found`);
     }
 
-    deleteBlog(id: number): IBlog | undefined {
+    deleteBlog(id: number): IBlog  {
         const index = this.blogData.findIndex(blog => blog.id === id);
         if (index !== -1) {
             const deletedBlog = this.blogData.splice(index, 1)[0];
             return deletedBlog;
         }
-        return undefined; 
+        throw new HttpError(404, `Blog with id ${id} not found`);
+        
     }
 
 

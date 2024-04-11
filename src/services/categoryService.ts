@@ -32,12 +32,7 @@ class CategoryService {
             return this.categoryProducts[index];
         }else{
             throw  new HttpError(404, `Category product with id ${id} not found`)
-        }
-
-      
-          
-      
-        
+        }  
     }
 
     deleteCategoryItemById(id: number): ICategoryItem{
