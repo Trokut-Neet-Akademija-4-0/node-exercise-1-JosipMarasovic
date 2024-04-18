@@ -6,8 +6,8 @@ PK proizvod_id      PK1,FK proizvod_id        PK slike_id
 proizvodac          PK2,FK kupac_id           link
 kolicina            FK kosarica_id            opis
 cijena              kolicina                  naziv
-                                              is_thumbnail
-                                              FK proizvod_id  
+opis                                          is_thumbnail
+ime_proizvoda                                 FK proizvod_id  
 
  KOSARICA            KUPAC                    RACUN
 
