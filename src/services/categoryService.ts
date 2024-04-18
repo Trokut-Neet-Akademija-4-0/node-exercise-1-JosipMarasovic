@@ -16,13 +16,10 @@ class CategoryService {
     }
 
     getCategoryItemById(id: number): ICategoryItem {
-       
         const foundCategoryItem = this.categoryProducts.find(product => product.id === id);
         if(!foundCategoryItem)
             throw  new HttpError(404, `Category product with id ${id} not found`)
         return foundCategoryItem
-       
-       
     }
 
     updateCategoryItemById(id: number, updatedCategoryItem: ICategoryItem): ICategoryItem {
@@ -43,7 +40,6 @@ class CategoryService {
         }
         throw new HttpError (404, `Category product with id ${id} not found`)
     }
-
 }
 
 

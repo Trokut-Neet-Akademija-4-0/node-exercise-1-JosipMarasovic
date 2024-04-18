@@ -27,7 +27,6 @@ class BlogService {
         return newBlog;
     }
     
-
     updateBlog(id: number, updatedBlogData: IBlog): IBlog  {
         const index = this.blogData.findIndex(blog => blog.id === id);
         if (index !== -1) {
@@ -44,10 +43,8 @@ class BlogService {
             const deletedBlog = this.blogData.splice(index, 1)[0];
             return deletedBlog;
         }
-        throw new HttpError(404, `Blog with id ${id} not found`);
-        
+        throw new HttpError(404, `Blog with id ${id} not found`); 
     }
-
 
 }
 

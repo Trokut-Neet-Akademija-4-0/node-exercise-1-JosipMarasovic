@@ -7,7 +7,7 @@ class Student extends Osoba {
         private brojIndexa : number,
     ){
         super(ime,dob) 
-    }
+    }  
 }
 
 export default Student

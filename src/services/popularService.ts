@@ -2,20 +2,14 @@ import Product from "../models/interfaces/productinterface";
 import products from "../models/productModel";
 import HttpError from "../utils/HttpError";
 
-
-
 class PopularService{
     private products : Product [] = products
 
-
-
     getPopularProducts() :Product[] {
         return this.products
-
     }
 
     getProductById(id:number): Product {
-
       const foundProduct = this.products.find((product) => product.id === id)
       if (!foundProduct) {
         throw new HttpError(404, `Product with id ${id} not found`);
@@ -44,10 +38,7 @@ class PopularService{
         }
 
         throw new HttpError(404, `Product with id ${id} not found`);
-       
-    }
-
-    
+    }  
 }
 
 export default new PopularService()
