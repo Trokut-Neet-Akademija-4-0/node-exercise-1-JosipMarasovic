@@ -1,4 +1,4 @@
-import IBlog from "./interfaces/blogInterface";
+import {IBlog} from "./interfaces/blogInterface";
 
 const blogData : IBlog [] = [{
     id :1,

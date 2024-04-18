@@ -5,24 +5,19 @@ import ICart from "../models/interfaces/cartInterface"
 import userCart from '../models/cartModel'
 import productDetailServices from "./productDetailServices"
 
-
-
 class CartService {
     private cart: ICart = userCart
 
-    
   getCart(): ICart {
     return this.cart
   }
 
- 
   addProductById(id: number): ICart {
     this.changeProductQuantity(id, 1)
     this.updateCartInformation()
     return this.cart
   }
 
-  
   deleteProductById(id: number): ICart {
     const indexToDelete = this.getCartProductIndexByProductId(id)
 
@@ -61,7 +56,6 @@ class CartService {
     }
   }
 
- 
   getCartProductByProductId(id: number): CartProduct {
     const foundCartProduct = this.cart.products.find(
       (cartProduct) => cartProduct.product.id === id,

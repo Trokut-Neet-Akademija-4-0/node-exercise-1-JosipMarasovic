@@ -2,17 +2,14 @@ import Product from "../models/interfaces/productinterface";
 import products from "../models/productModel";
 import HttpError from "../utils/HttpError";
 
-
-
 class ProductDetailService{
     private products: Product[] = products
 
-    
     getAllProducts() :Product[] {
         return this.products
 
     }
-    
+  
   getProductById(id: number): Product {
     const foundProduct = this.products.find((product) => product.id === id)
     if (!foundProduct)
@@ -30,7 +27,6 @@ class ProductDetailService{
     const deletedProduct = this.products.splice(indexToDelete, 1)
     return deletedProduct[0]
   }
-
 
 }
 
