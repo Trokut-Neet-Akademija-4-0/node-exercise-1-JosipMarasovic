@@ -14,10 +14,8 @@ import cartRoutes from './routes/cartRoutes'
 const app: Express = express()
 const port = process.env.PORT || 3000
 
-
 app.use(express.json())
 app.use(errorHandler)
-
 
 app.use('/', homeRoutes)
 app.use('/popular',popularRoutes)
@@ -26,9 +24,6 @@ app.use('/blog',blogRoutes)
 app.use('/items',categoryRoutes)
 app.use('/productDetail',productDetailRoutes)
 app.use('/cart',cartRoutes)
-
-
-
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`)
