@@ -8,6 +8,18 @@ import categoryRoutes from './routes/categoryRoutes'
 import productDetailRoutes from './routes/productDetailRoutes'
 import errorHandler from './middlewares/errorHandler'
 import cartRoutes from './routes/cartRoutes'
+import 'reflect-metadata'
+import dataSource from './app-data-source'
+
+
+dataSource
+  .initialize()
+  .then(() => {
+    console.log('Data Source has been initialized!')
+  })
+  .catch((err) => {
+    console.error('Error during Data Source initialization:', err)
+  })
 
 
 
