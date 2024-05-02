@@ -14,4 +14,6 @@ export class Blog {
 
   @Column("text", { name: "images" })
   images!: string;
+    static find: any;
+    static findOne: any;
 }

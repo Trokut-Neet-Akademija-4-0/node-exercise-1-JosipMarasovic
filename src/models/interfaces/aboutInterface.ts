@@ -1,9 +1,9 @@
 
 
 
-interface About {
+interface IAbout {
     content: string;
    
   }
 
-  export default About
+  export default IAbout

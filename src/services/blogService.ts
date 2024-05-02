@@ -1,16 +1,21 @@
 import {IBlog} from '../models/interfaces/blogInterface'
 import blogData from '../models/blogModel'
 import HttpError from '../utils/HttpError'
+import { Blog } from '../entities/Blog'
 
 
 class BlogService {
     private blogData : IBlog[] = blogData
 
-    getAllBlogData() : IBlog [] {
-        return this.blogData
+    async getAllBlogData() : Promise<Blog []> {
+        return await Blog.find()
     }
 
-    getBlogById(id: number): IBlog  {
+    async getBlogById(id: number): Promise<IBlog | undefined> {
+        return await Blog.findOne(id);
+    }
+
+  /*  getBlogById(id: number): IBlog  {
         const foundBlog = this.blogData.find(blog => blog.id === id);
         if (!foundBlog) {
             throw new HttpError(404, `Blog with id ${id} not found`);
@@ -44,7 +49,7 @@ class BlogService {
             return deletedBlog;
         }
         throw new HttpError(404, `Blog with id ${id} not found`); 
-    }
+    }*/
 
 }
 
