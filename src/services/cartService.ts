@@ -3,7 +3,7 @@ import CartProduct from "../models/cartProductModel"
 import HttpError from "../utils/HttpError"
 import ICart from "../models/interfaces/cartInterface"
 import userCart from '../models/cartModel'
-import productDetailServices from "./productDetailServices"
+
 
 class CartService {
     private cart: ICart = userCart

@@ -1,5 +1,4 @@
-import {IBlog} from '../models/interfaces/blogInterface'
-import blogData from '../models/blogModel'
+
 import HttpError from '../utils/HttpError'
 import  Blog  from '../entities/Blog'
 
@@ -13,7 +12,7 @@ class BlogService {
             }
         })
         if(!foundBlog)
-            throw new HttpError(404,`Product with id ${id} not found`)
+            throw new HttpError(404,`Blog with id ${id} not found`)
             return foundBlog   
     }
 
@@ -23,11 +22,20 @@ class BlogService {
         return blog.remove()
     }
 
-    async updateBlog(blog_id :number,existingBlog :Blog ) :Promise <Blog>{
-        const blog = await this.getBlogById(blog_id)
-        blog.updateExistingProduct(existingBlog)
-        return blog.save()
+    async getBlogPictureById() : Promise<Blog>{
+
+
+        return new Blog
     }
+
+
+    async deleteBlogPictureById() : Promise<Blog>{
+      
+
+        return new Blog
+    }
+
+   
     
     
 }

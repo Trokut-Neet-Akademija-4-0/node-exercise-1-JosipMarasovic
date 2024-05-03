@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 import blogService from '../services/blogService'
-import { IBlog } from '../models/interfaces/blogInterface'
-import Blog from '../entities/Blog'
+
 
 
 
@@ -18,11 +17,16 @@ const deleteBlogById = async( req :Request,res : Response) => {
     )
 }
 
-const updateBlog = async ( req :Request,res : Response) => {
-    const blogId = Number.parseInt(req.params.id)
-    const existingBlog = req.body as Blog
-    res.send(await blogService.updateBlog(blogId,existingBlog))
+const getBlogPictureById = async( req :Request,res : Response) => {
+
 }
+
+const deleteBlogPictureById = async( req :Request,res : Response) => {
+    
+}
+
+
+
 
 
 
@@ -30,5 +34,6 @@ const updateBlog = async ( req :Request,res : Response) => {
 export {
     getBlogById,
     deleteBlogById,
-    updateBlog
+    getBlogPictureById
+   
 }

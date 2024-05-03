@@ -4,12 +4,12 @@ import HttpError from "../utils/HttpError";
 
 class AboutService {
     async getAboutContent(): Promise<About> {
-        const aboutEntry = await About.findOne({});
+        const aboutEntry = await About.find();
         if (!aboutEntry) {
-            // Handle the case where no entry is found
-            throw new Error('No About entry found');
+           
+            throw  new HttpError(404,`Content not found`)
         }
-        return aboutEntry;
+        return aboutEntry[0];
     }
 }
 

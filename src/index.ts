@@ -5,6 +5,7 @@ import aboutRoute from './routes/aboutRoute'
 import blogRoutes from './routes/blogRoutes'
 import errorHandler from './middlewares/errorHandler'
 import cartRoutes from './routes/cartRoutes'
+import productsRoute from  './routes/productsRoute'
 import 'reflect-metadata'
 import dataSource from './app-data-source'
 
@@ -30,6 +31,7 @@ app.use('/', homeRoutes)
 app.use('/about',aboutRoute)
 app.use('/blog',blogRoutes)
 app.use('/cart',cartRoutes)
+app.use('/products',productsRoute)
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`)
