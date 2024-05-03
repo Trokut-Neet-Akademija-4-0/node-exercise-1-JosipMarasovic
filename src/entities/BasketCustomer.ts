@@ -1,8 +1,8 @@
-import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
-import { Basket } from "./Basket";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import  Basket  from "./Basket";
 
 @Entity("BasketCustomer", { schema: "public" })
-export class BasketCustomer {
+export default class BasketCustomer  extends BaseEntity{
   @Column("bigint", { name: "customer_id" })
   customerId!: string;
 

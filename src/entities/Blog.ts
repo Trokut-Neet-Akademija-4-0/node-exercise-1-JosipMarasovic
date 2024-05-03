@@ -1,8 +1,9 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("Blog_pkey", ["blogId"], { unique: true })
 @Entity("Blog", { schema: "public" })
-export class Blog {
+export default class Blog  extends BaseEntity{
+ 
   @PrimaryGeneratedColumn({ type: "bigint", name: "blog_id" })
   blogId!: string;
 
@@ -14,6 +15,6 @@ export class Blog {
 
   @Column("text", { name: "images" })
   images!: string;
-    static find: any;
-    static findOne: any;
+    
+    
 }

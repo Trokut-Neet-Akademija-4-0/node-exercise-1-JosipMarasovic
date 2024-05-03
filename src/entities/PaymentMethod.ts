@@ -1,15 +1,16 @@
 import {
+  BaseEntity,
   Column,
   Entity,
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { BasketPaymentMethod } from "./BasketPaymentMethod";
+import  BasketPaymentMethod  from "./BasketPaymentMethod";
 
 @Index("PaymentMethod_pkey", ["methodId"], { unique: true })
 @Entity("PaymentMethod", { schema: "public" })
-export class PaymentMethod {
+export default class PaymentMethod  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "method_id" })
   methodId!: string;
 

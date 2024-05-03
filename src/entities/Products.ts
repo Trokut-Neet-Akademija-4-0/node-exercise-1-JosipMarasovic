@@ -1,17 +1,18 @@
 import {
+  BaseEntity,
   Column,
   Entity,
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Basket } from "./Basket";
-import { Images } from "./Images";
-import { Productcategory } from "./Productcategory";
+import  Basket  from "./Basket";
+import  Images  from "./Images";
+import  Productcategory  from "./Productcategory";
 
 @Index("Products_pkey", ["productId"], { unique: true })
 @Entity("Products", { schema: "public" })
-export class Products {
+export default class Products  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "product_id" })
   productId!: string;
 

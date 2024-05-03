@@ -1,15 +1,16 @@
 import {
+  BaseEntity,
   Column,
   Entity,
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Productcategory } from "./Productcategory";
+import  Productcategory  from "./Productcategory";
 
 @Index("category_pkey", ["categoryId"], { unique: true })
 @Entity("category", { schema: "public" })
-export class Category {
+export default class Category  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "category_id" })
   categoryId!: string;
 

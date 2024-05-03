@@ -1,8 +1,8 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("Customer_pkey", ["customerId"], { unique: true })
 @Entity("Customer", { schema: "public" })
-export class Customer {
+export default class Customer  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "customer_id" })
   customerId!: string;
 

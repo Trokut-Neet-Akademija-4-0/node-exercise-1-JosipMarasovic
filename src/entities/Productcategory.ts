@@ -1,9 +1,9 @@
-import { Entity, JoinColumn, ManyToOne } from "typeorm";
-import { Category } from "./Category";
-import { Products } from "./Products";
+import { BaseEntity, Entity, JoinColumn, ManyToOne } from "typeorm";
+import  Category  from "./Category";
+import  Products  from "./Products";
 
 @Entity("productcategory", { schema: "public" })
-export class Productcategory {
+export default class Productcategory  extends BaseEntity{
   @ManyToOne(() => Category, (category) => category.productcategories)
   @JoinColumn([{ name: "category_id", referencedColumnName: "categoryId" }])
   category: Category = new Category;

@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   Entity,
   Index,
@@ -6,11 +7,11 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Products } from "./Products";
+import  Products  from "./Products";
 
 @Index("images_pkey", ["imageId"], { unique: true })
 @Entity("images", { schema: "public" })
-export class Images {
+export default class Images  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "image_id" })
   imageId!: string;
 

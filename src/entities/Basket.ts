@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   Entity,
   Index,
@@ -7,13 +8,13 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Products } from "./Products";
-import { BasketCustomer } from "./BasketCustomer";
-import { BasketPaymentMethod } from "./BasketPaymentMethod";
+import  Products  from "./Products";
+import  BasketCustomer  from "./BasketCustomer";
+import  BasketPaymentMethod  from "./BasketPaymentMethod";
 
 @Index("Basket_pkey", ["basketId"], { unique: true })
 @Entity("Basket", { schema: "public" })
-export class Basket {
+export default class Basket extends BaseEntity {
   @PrimaryGeneratedColumn({ type: "bigint", name: "basket_id" })
   basketId!: string;
 

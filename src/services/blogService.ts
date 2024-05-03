@@ -1,7 +1,7 @@
 import {IBlog} from '../models/interfaces/blogInterface'
 import blogData from '../models/blogModel'
 import HttpError from '../utils/HttpError'
-import { Blog } from '../entities/Blog'
+import  Blog  from '../entities/Blog'
 
 
 class BlogService {
