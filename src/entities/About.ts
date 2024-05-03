@@ -6,7 +6,7 @@ export  default class About extends BaseEntity {
   
  
   @PrimaryGeneratedColumn({ type: "bigint", name: "about_id" })
-  aboutId!: string;
+  aboutId!: number;
 
   @Column("text", { name: "content" })
   content!: string;

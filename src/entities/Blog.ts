@@ -5,7 +5,7 @@ import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from "typeo
 export default class Blog  extends BaseEntity{
  
   @PrimaryGeneratedColumn({ type: "bigint", name: "blog_id" })
-  blogId!: string;
+  blogId!: number;
 
   @Column("character varying", { name: "title", length: 60 })
   title!: string;
@@ -17,4 +17,9 @@ export default class Blog  extends BaseEntity{
   images!: string;
     
     
+  updateExistingProduct(updatedData :Blog){
+    this.title = updatedData.title
+    this.content = updatedData.content
+    this.images = updatedData.images
+  }
 }

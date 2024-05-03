@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import  {Products}  from "./Products";
+import  Products  from "./Products";
 
 @Index("Popular_pkey", ["popularId"], { unique: true })
 @Entity("Popular", { schema: "public" })
