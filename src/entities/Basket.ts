@@ -7,9 +7,9 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Customer } from "./Customer";
-import { PaymentMethod } from "./PaymentMethod";
-import { Products } from "./Products";
+import  Customer  from "./Customer";
+import  PaymentMethod  from "./PaymentMethod";
+import  Products  from "./Products";
 
 @Index("Basket_pkey", ["basketId"], { unique: true })
 @Entity("Basket", { schema: "public" })
