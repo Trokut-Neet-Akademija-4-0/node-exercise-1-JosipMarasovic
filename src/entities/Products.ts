@@ -3,16 +3,19 @@ import {
   Column,
   Entity,
   Index,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import  Basket  from "./Basket";
-import  Images  from "./Images";
-import  Productcategory  from "./Productcategory";
+import  Popular  from "./Popular";
+import  Category  from "./Category";
+import   Images  from "./Images";
 
 @Index("Products_pkey", ["productId"], { unique: true })
 @Entity("Products", { schema: "public" })
-export default class Products  extends BaseEntity{
+export  default class Products  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "product_id" })
   productId!: string;
 
@@ -31,14 +34,8 @@ export default class Products  extends BaseEntity{
   @Column("int8", { name: "quantity", array: true })
   quantity!: string[];
 
-  @Column("character varying", { name: "category", length: 60 })
-  category!: string;
-
-  @Column("character varying", { name: "thumbnail", length: 60 })
+  @Column("character varying", { name: "thumbnail", length: 1024 })
   thumbnail!: string;
-
-  @Column("text", { name: "images" })
-  images!: string;
 
   @Column("boolean", { name: "popular", nullable: true })
   popular!: boolean | null;
@@ -46,12 +43,15 @@ export default class Products  extends BaseEntity{
   @OneToMany(() => Basket, (basket) => basket.product)
   baskets!: Basket[];
 
-  @OneToMany(() => Images, (images) => images.product)
-  images2!: Images[];
+  @OneToMany(() => Popular, (popular) => popular.product)
+  populars!: Popular[];
 
-  @OneToMany(
-    () => Productcategory,
-    (productcategory) => productcategory.product
-  )
-  productcategories!: Productcategory[];
+  @ManyToOne(() => Category, (category) => category.products, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn([{ name: "category_id", referencedColumnName: "categoryId" }])
+  category: Category = new Category;
+
+  @OneToMany(() => Images, (images) => images.product)
+  images!: Images[];
 }

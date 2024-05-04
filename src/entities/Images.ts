@@ -11,14 +11,14 @@ import  Products  from "./Products";
 
 @Index("images_pkey", ["imageId"], { unique: true })
 @Entity("images", { schema: "public" })
-export default class Images  extends BaseEntity{
+export  default class Images  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "image_id" })
   imageId!: string;
 
   @Column("text", { name: "imageUrl" })
   imageUrl!: string;
 
-  @ManyToOne(() => Products, (products) => products.images2)
+  @ManyToOne(() => Products, (products) => products.images)
   @JoinColumn([{ name: "product_id", referencedColumnName: "productId" }])
   product!: Products;
 }

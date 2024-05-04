@@ -1,4 +1,12 @@
-import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  Index,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import  Basket  from "./Basket";
 
 @Index("Customer_pkey", ["customerId"], { unique: true })
 @Entity("Customer", { schema: "public" })
@@ -26,4 +34,7 @@ export default class Customer  extends BaseEntity{
 
   @Column("text", { name: "deliveryInstructions" })
   deliveryInstructions!: string;
+
+  @OneToMany(() => Basket, (basket) => basket.customer)
+  baskets!: Basket[];
 }

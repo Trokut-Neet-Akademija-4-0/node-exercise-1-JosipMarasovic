@@ -2,8 +2,7 @@ import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from "typeo
 
 @Index("Blog_pkey", ["blogId"], { unique: true })
 @Entity("Blog", { schema: "public" })
-export default class Blog  extends BaseEntity{
- 
+export default class Blog extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "blog_id" })
   blogId!: number;
 
@@ -15,11 +14,4 @@ export default class Blog  extends BaseEntity{
 
   @Column("text", { name: "images" })
   images!: string;
-    
-    
-  updateExistingProduct(updatedData :Blog){
-    this.title = updatedData.title
-    this.content = updatedData.content
-    this.images = updatedData.images
-  }
 }

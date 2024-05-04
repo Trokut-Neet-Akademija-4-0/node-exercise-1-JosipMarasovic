@@ -22,6 +22,8 @@ class BlogService {
         return blog.remove()
     }
 
+    
+
     async getBlogPictureById() : Promise<Blog>{
 
 
@@ -40,4 +42,4 @@ class BlogService {
     
 }
 
-export default new BlogService()
+export default new BlogService() 

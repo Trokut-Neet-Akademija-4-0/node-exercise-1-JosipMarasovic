@@ -12,11 +12,11 @@ class CartService {
     return this.cart
   }
 
-  addProductById(id: number): ICart {
+ /* addProductById(id: number): ICart {
     this.changeProductQuantity(id, 1)
     this.updateCartInformation()
     return this.cart
-  }
+  }*/
 
   deleteProductById(id: number): ICart {
     const indexToDelete = this.getCartProductIndexByProductId(id)
@@ -36,7 +36,7 @@ class CartService {
     return this.cart
   }
 
-  changeProductQuantity(productId: number, quantityModifier: number): void {
+  /*changeProductQuantity(productId: number, quantityModifier: number): void {
     const product = productDetailServices.getProductById(productId)
 
     try {
@@ -54,7 +54,7 @@ class CartService {
           ),
         )
     }
-  }
+  }*/
 
   getCartProductByProductId(id: number): CartProduct {
     const foundCartProduct = this.cart.products.find(

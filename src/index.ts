@@ -3,8 +3,11 @@ import express, { Express } from 'express'
 import homeRoutes from './routes/homeRoutes'
 import aboutRoute from './routes/aboutRoute'
 import blogRoutes from './routes/blogRoutes'
-import errorHandler from './middlewares/errorHandler'
 import cartRoutes from './routes/cartRoutes'
+
+
+import errorHandler from './middlewares/errorHandler'
+
 import productsRoute from  './routes/productsRoute'
 import 'reflect-metadata'
 import dataSource from './app-data-source'

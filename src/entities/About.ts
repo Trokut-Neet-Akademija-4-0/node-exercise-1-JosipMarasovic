@@ -2,13 +2,10 @@ import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from "typeo
 
 @Index("About_pkey", ["aboutId"], { unique: true })
 @Entity("About", { schema: "public" })
-export  default class About extends BaseEntity {
-  
- 
+export default class About extends BaseEntity {
   @PrimaryGeneratedColumn({ type: "bigint", name: "about_id" })
-  aboutId!: number;
+  aboutId!: string;
 
   @Column("text", { name: "content" })
   content!: string;
- 
 }

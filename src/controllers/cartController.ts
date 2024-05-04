@@ -5,11 +5,11 @@ const getCart = (req: Request, res: Response) => {
   res.send(cartService.getCart())
 }
 
-const addProductToCart = (req: Request, res: Response) => {
+/*const addProductToCart = (req: Request, res: Response) => {
   res.send(
     cartService.addProductById(Number.parseInt(req.params.productId, 10)),
   )
-}
+}*/
 
 const removeProductFromCart = (req: Request, res: Response) => {
   res.send(
@@ -21,4 +21,4 @@ const clearCart = (req: Request, res: Response) => {
   res.send(cartService.clearCart())
 }
 
-export { getCart, addProductToCart, removeProductFromCart, clearCart }
+export { getCart,removeProductFromCart, clearCart }
