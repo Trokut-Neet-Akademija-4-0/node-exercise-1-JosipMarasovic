@@ -17,7 +17,7 @@ import   Images  from "./Images";
 @Entity("Products", { schema: "public" })
 export  default class Products  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "product_id" })
-  productId!: string;
+  productId!: number;
 
   @Column("character varying", { name: "title", length: 60 })
   title!: string;
@@ -25,14 +25,14 @@ export  default class Products  extends BaseEntity{
   @Column("character varying", { name: "description", length: 60 })
   description!: string;
 
-  @Column("int8", { name: "price", array: true })
-  price!: string[];
+  @Column("int8", { name: "price" })
+  price!: number;
 
   @Column("bigint", { name: "discountPercentage" })
-  discountPercentage!: string;
+  discountPercentage!: number;
 
-  @Column("int8", { name: "quantity", array: true })
-  quantity!: string[];
+  @Column("int8", { name: "quantity" })
+  quantity!: number;
 
   @Column("character varying", { name: "thumbnail", length: 1024 })
   thumbnail!: string;

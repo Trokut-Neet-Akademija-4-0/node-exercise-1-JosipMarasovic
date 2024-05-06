@@ -25,14 +25,11 @@ class BlogService {
     
 
     async getBlogPictureById() : Promise<Blog>{
-
-
         return new Blog
     }
 
 
     async deleteBlogPictureById() : Promise<Blog>{
-      
 
         return new Blog
     }

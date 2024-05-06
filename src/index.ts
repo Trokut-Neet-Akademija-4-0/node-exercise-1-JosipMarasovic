@@ -7,14 +7,17 @@ import blogRoutes from './routes/blogRoutes'
 import cartRoutes from './routes/cartRoutes'
 import errorHandler from './middlewares/errorHandler'
 import productsRoute from  './routes/productsRoute'
-
 import dataSource from './app-data-source'
+import ProductImporter from './config/productImporter'
+import BlogImporter from './config/blogImporter'
 
 
 dataSource
   .initialize()
-  .then(() => {
+  .then( async() => {
     console.log('Data Source has been initialized!')
+    await ProductImporter.loadAllProducts()
+    await BlogImporter.loadAllBlogs()
   })
   .catch((err) => {
     console.error('Error during Data Source initialization:', err)

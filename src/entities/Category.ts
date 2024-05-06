@@ -12,7 +12,7 @@ import  Products  from "./Products";
 @Entity("category", { schema: "public" })
 export  default class Category extends BaseEntity {
   @PrimaryGeneratedColumn({ type: "bigint", name: "category_id" })
-  categoryId!: string;
+  categoryId!: number;
 
   @Column("character varying", { name: "categoryname", length: 60 })
   categoryname!: string;

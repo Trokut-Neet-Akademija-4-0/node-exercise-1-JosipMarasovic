@@ -7,13 +7,13 @@ import blogService from '../services/blogService'
 
 const getBlogById =  async (req: Request, res: Response) => {
    res.send(
-    await blogService.getBlogById(Number.parseInt(req.params.id))
+    await blogService.getBlogById(Number.parseInt(req.params.id, 10))
    )
 }
 
 const deleteBlogById = async( req :Request,res : Response) => {
     res.send(
-        await blogService.deleteBlogById(Number.parseInt(req.params.id))
+        await blogService.deleteBlogById(Number.parseInt(req.params.id, 10))
     )
 }
 
