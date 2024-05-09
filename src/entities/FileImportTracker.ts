@@ -1,8 +1,8 @@
-import { BaseEntity, BeforeSoftRemove, Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("FileImportTracker_pkey", ["id"], { unique: true })
 @Entity("FileImportTracker", { schema: "public" })
-export  default class FileImportTracker extends BaseEntity {
+export  default class FileImportTracker  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "integer", name: "id" })
   id!: number;
 

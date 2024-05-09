@@ -2,7 +2,6 @@
 import express, { Express } from 'express'
 import 'reflect-metadata'
 import homeRoutes from './routes/homeRoutes'
-import aboutRoute from './routes/aboutRoute'
 import blogRoutes from './routes/blogRoutes'
 import cartRoutes from './routes/cartRoutes'
 import errorHandler from './middlewares/errorHandler'
@@ -16,8 +15,9 @@ dataSource
   .initialize()
   .then( async() => {
     console.log('Data Source has been initialized!')
-    await ProductImporter.loadAllProducts()
     await BlogImporter.loadAllBlogs()
+   
+  
   })
   .catch((err) => {
     console.error('Error during Data Source initialization:', err)
@@ -32,7 +32,7 @@ app.use(express.json())
 app.use(errorHandler)
 
 app.use('/', homeRoutes)
-app.use('/about',aboutRoute)
+
 app.use('/blog',blogRoutes)
 app.use('/cart',cartRoutes)
 app.use('/products',productsRoute)

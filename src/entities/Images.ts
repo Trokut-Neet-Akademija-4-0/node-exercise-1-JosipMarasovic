@@ -15,8 +15,8 @@ export  default class Images  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "image_id" })
   imageId!: string;
 
-  @Column("text", { name: "imageUrl" })
-  imageUrl!: string;
+  @Column("text", { name: "imageUrl", nullable: true })
+  imageUrl!: string | null;
 
   @ManyToOne(() => Products, (products) => products.images)
   @JoinColumn([{ name: "product_id", referencedColumnName: "productId" }])

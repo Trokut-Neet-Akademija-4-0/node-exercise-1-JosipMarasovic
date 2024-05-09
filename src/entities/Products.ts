@@ -11,7 +11,7 @@ import {
 import  Basket  from "./Basket";
 import  Popular  from "./Popular";
 import  Category  from "./Category";
-import   Images  from "./Images";
+import  Images  from "./Images";
 
 @Index("Products_pkey", ["productId"], { unique: true })
 @Entity("Products", { schema: "public" })
@@ -19,23 +19,27 @@ export  default class Products  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "product_id" })
   productId!: number;
 
-  @Column("character varying", { name: "title", length: 60 })
-  title!: string;
+  @Column("character varying", { name: "title", nullable: true, length: 60 })
+  title!: string | null;
 
-  @Column("character varying", { name: "description", length: 60 })
-  description!: string;
+  @Column("character varying", {
+    name: "description",
+    nullable: true,
+    length: 60,
+  })
+  description!: string | null;
 
-  @Column("int8", { name: "price" })
-  price!: number;
+  @Column("bigint", { name: "price", nullable: true })
+  price!: number | null;
 
-  @Column("bigint", { name: "discountPercentage" })
-  discountPercentage!: number;
+  @Column("bigint", { name: "discountPercentage", nullable: true })
+  discountPercentage!: number | null;
 
-  @Column("int8", { name: "quantity" })
-  quantity!: number;
+  @Column("bigint", { name: "quantity", nullable: true })
+  quantity!: number | null;
 
-  @Column("character varying", { name: "thumbnail", length: 1024 })
-  thumbnail!: string;
+  @Column("text", { name: "thumbnail", nullable: true })
+  thumbnail!: string | null;
 
   @Column("boolean", { name: "popular", nullable: true })
   popular!: boolean | null;

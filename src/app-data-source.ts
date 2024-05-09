@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm'
-import About from './entities/About'
+
 import Basket from './entities/Basket'
 import Blog from './entities/Blog'
 import Category from './entities/Category'
@@ -18,7 +18,6 @@ export default new DataSource({
   password: 'admin1234',
   database: 'postgres',
   entities: [
-    About,
     Basket,
     Blog,
     Category,
@@ -29,5 +28,5 @@ export default new DataSource({
     Popular,
     Products
   ],
- // migrations: ['src/migration/*.ts'],
+ migrations: ['src/migration/*.ts'],
 })

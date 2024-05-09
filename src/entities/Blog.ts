@@ -2,16 +2,16 @@ import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from "typeo
 
 @Index("Blog_pkey", ["blogId"], { unique: true })
 @Entity("Blog", { schema: "public" })
-export default class Blog extends BaseEntity{
+export  default class Blog  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "blog_id" })
-  blogId!: number;
+  blogId!: string;
 
-  @Column("character varying", { name: "title", length: 60 })
-  title!: string;
+  @Column("character varying", { name: "title", nullable: true, length: 60 })
+  title!: string | null;
 
-  @Column("text", { name: "content" })
-  content!: string;
+  @Column("character varying", { name: "content", nullable: true, length: 255 })
+  content!: string | null;
 
-  @Column("text", { name: "images" })
-  images!: string;
+  @Column("character varying", { name: "images", nullable: true, length: 255 })
+  images!: string | null;
 }

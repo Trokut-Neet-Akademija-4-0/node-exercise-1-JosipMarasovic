@@ -11,7 +11,7 @@ import Category from '../entities/Category';
 
 export default class ProductImporter {
   static async loadAllProducts(): Promise<void> {
-    if (!process.env.IMPORTS_FOLDER_PATH_PRODUCTS) { // Change to use IMPORTS_FOLDER_PATH_PRODUCTS
+    if (!process.env.IMPORTS_FOLDER_PATH_PRODUCTS) { 
       console.log('Import folder path not specified.');
       return;
     }

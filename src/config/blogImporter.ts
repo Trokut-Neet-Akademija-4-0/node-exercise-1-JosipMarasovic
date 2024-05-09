@@ -38,6 +38,7 @@ export default class BlogImporter {
             parse({
               // CSV options if any
               delimiter: ',',
+              columns: false, 
             })
           );
 
