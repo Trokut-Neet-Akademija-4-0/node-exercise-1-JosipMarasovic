@@ -54,7 +54,7 @@ export  default class Products  extends BaseEntity{
     onDelete: "CASCADE",
   })
   @JoinColumn([{ name: "category_id", referencedColumnName: "categoryId" }])
-  category: Category = new Category;
+  category!: Category ;
 
   @OneToMany(() => Images, (images) => images.product)
   images!: Images[];

@@ -3,6 +3,11 @@ import blogService from '../services/blogService'
 
 
 
+const getAllBlogs = async (req: Request, res: Response) => {
+    res.send(
+        await blogService.getAllBlogs()
+    )
+}
 
 
 const getBlogById =  async (req: Request, res: Response) => {
@@ -34,6 +39,7 @@ const deleteBlogPictureById = async( req :Request,res : Response) => {
 export {
     getBlogById,
     deleteBlogById,
-    getBlogPictureById
+    getBlogPictureById,
+    getAllBlogs
    
 }

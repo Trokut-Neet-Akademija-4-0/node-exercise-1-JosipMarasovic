@@ -4,7 +4,7 @@ import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from "typeo
 @Entity("Blog", { schema: "public" })
 export  default class Blog  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "blog_id" })
-  blogId!: string;
+  blogId!: number;
 
   @Column("character varying", { name: "title", nullable: true, length: 60 })
   title!: string | null;

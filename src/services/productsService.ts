@@ -11,9 +11,9 @@ class ProductsService{
             relations:{
                 images :true
             }
+
         })
     }
-
 
     async getProductById(id:number):Promise<Products> {
         const foundProduct = await Products.findOne({
@@ -30,25 +30,10 @@ class ProductsService{
         return foundProduct
     }
 
-   /* async getAllProductsFromCategory(id:number) : Promise<Products[]>{
-        const category = await Category.findOne({
-            where : {
-                categoryId :id
-            }
-        });
-        if (!category) {
-            throw new HttpError(404, `Category with id ${id} not found`);
-        }
-        return Products.find({
-            relations: {
-                images: true
-            },
-            where: {
-                category: category
-            }
-        });
+   
+       
          
-    }*/
+    
     async getAllProductsFromCategory(categoryName: string): Promise<Products[]> {
         const category = await Category.findOne({
             where: {
