@@ -2,6 +2,7 @@
 import Category from "../entities/Category"
 import Products from "../entities/Products"
 import HttpError from "../utils/HttpError"
+import { FindManyOptions, FindOptions } from "typeorm";
 
 class ProductsService{
 
@@ -31,26 +32,24 @@ class ProductsService{
     }
 
    
-       
-         
-    
-    async getAllProductsFromCategory(categoryName: string): Promise<Products[]> {
-        const category = await Category.findOne({
-            where: {
-                categoryname: categoryName
-            }
-        });
+    async getCategoryByName(categoryName: string): Promise<Category | null> {
+        return Category.findOne({ where: { categoryname: categoryName } });
+    }
+
+    async getProductsByCategoryName(categoryName: string): Promise<Products[]> {
+        const category = await this.getCategoryByName(categoryName);
         if (!category) {
-            throw new HttpError(404, `Category with name '${categoryName}' not found`);
+            throw new Error(`Category with name '${categoryName}' not found`);
         }
-        return Products.find({
-            relations: {
-                images: true
-            },
-            where: {
-                category: category
-            }
-        });
+        return this.getProductsByCategory(category.categoryId);
+    }
+
+    async getProductsByCategory(categoryId: number): Promise<Products[]> {
+        const options: FindManyOptions<Products> = {
+            where: { category: { categoryId } },
+            relations: { images: true }
+        };
+        return Products.find(options);
     }
 
 

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import productsService from '../services/productsService'
+import Category from '../entities/Category'
 
 
 
@@ -12,13 +13,15 @@ const getProductById = async  (req: Request, res: Response) => {
     res.send(await productsService.getProductById(productId));
 }
 
-const getAllProductsFromCategory = async  (req: Request, res: Response) => {
-    res.send(await productsService.getAllProductsFromCategory(req.params.category))
-}
 
+const getCategoryProductsByName = async (req: Request, res: Response) => {
+    const categoryName = req.params.categoryName;
+    res.send(await productsService.getProductsByCategoryName(categoryName))
+}
 
 export{
     getAllProducts,
     getProductById,
-    getAllProductsFromCategory
+    getCategoryProductsByName
+  
 }

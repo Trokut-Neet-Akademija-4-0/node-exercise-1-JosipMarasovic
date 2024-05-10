@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import {getAllProducts,getProductById,getAllProductsFromCategory} from '../controllers/productsController'
+import {getAllProducts,getProductById,getCategoryProductsByName} from '../controllers/productsController'
 
 
 const router = express.Router()
@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.get('/',getAllProducts)
 router.get('/:id',getProductById)
-router.get('/:/category/:categoryName',getAllProducts)
+router.get('/category/:categoryName',getCategoryProductsByName)
 
 
 
