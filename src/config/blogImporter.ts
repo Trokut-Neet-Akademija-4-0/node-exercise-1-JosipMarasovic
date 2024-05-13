@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { parse } from 'csv';
 import path from 'path';
 import Blog from '../entities/Blog';
 import FileImportTracker from '../entities/FileImportTracker';
@@ -16,7 +15,7 @@ export default class BlogImporter {
         withFileTypes: true,
       })
     )
-      .filter((file) => file.isFile() && file.name.split('.').pop() === 'csv')
+      .filter((file) => file.isFile() && file.name.split('.').pop() === 'json')
       .map((file) => file.name);
 
     try {
@@ -29,21 +28,12 @@ export default class BlogImporter {
 
         if (alreadyImported) continue;
 
-        const parser = await fs
-          .createReadStream(
-            path.join(process.env.IMPORTS_FOLDER_PATH, fileName),
-            'utf8'
-          )
-          .pipe(
-            parse({
-              // CSV options if any
-              delimiter: ',',
-              columns: false, 
-            })
-          );
+        const filePath = path.join(process.env.IMPORTS_FOLDER_PATH, fileName);
+        const jsonContent = await fs.promises.readFile(filePath, 'utf-8');
+        const blogs = JSON.parse(jsonContent);
 
-        for await (const record of parser) {
-          const blog = BlogImporter.convertCSVRecordToBlogEntity(record);
+        for (const record of blogs) {
+          const blog = BlogImporter.convertJSONToBlogEntity(record);
           await blog.save();
         }
 
@@ -58,10 +48,10 @@ export default class BlogImporter {
     }
   }
 
-  private static convertCSVRecordToBlogEntity(record: string[]): Blog {
+  private static convertJSONToBlogEntity(jsonData: any): Blog {
     const blog = new Blog();
-    blog.title = record[0];
-    blog.content = record[1];
+    blog.title = jsonData.title;
+    blog.content = jsonData.content;
     return blog;
   }
 }
