@@ -5,14 +5,14 @@ import Category from '../entities/Category';
 import FileImportTracker from '../entities/FileImportTracker';
 
 export default class CategoryImporter {
-  static async loadAllBlogs(): Promise<void> {
-    if (!process.env.IMPORTS_FOLDER_PATH) {
+  static async loadAllCategory(): Promise<void> {
+    if (!process.env.IMPORTS_FOLDER_PATH_CATEGORY) {
       console.log('Import folder path not specified.');
       return;
     }
 
     const allFilePathsInDirectory = (
-      await fs.promises.readdir(process.env.IMPORTS_FOLDER_PATH, {
+      await fs.promises.readdir(process.env.IMPORTS_FOLDER_PATH_CATEGORY, {
         withFileTypes: true,
       })
     )
@@ -31,7 +31,7 @@ export default class CategoryImporter {
 
         const parser = await fs
           .createReadStream(
-            path.join(process.env.IMPORTS_FOLDER_PATH, fileName),
+            path.join(process.env.IMPORTS_FOLDER_PATH_CATEGORY, fileName),
             'utf8'
           )
           .pipe(
@@ -43,7 +43,7 @@ export default class CategoryImporter {
           );
 
         for await (const record of parser) {
-          const category = CategoryImporter.convertCSVRecordToBlogEntity(record);
+          const category = CategoryImporter.convertCSVRecordToCategoryEntity(record);
           await category.save();
         }
 
@@ -58,7 +58,7 @@ export default class CategoryImporter {
     }
   }
 
-  private static convertCSVRecordToBlogEntity(record: string[]): Category {
+  private static convertCSVRecordToCategoryEntity(record: string[]): Category {
     const category = new Category();
     category.categoryname = record[0];
     return category;

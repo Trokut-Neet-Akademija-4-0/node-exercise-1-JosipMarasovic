@@ -9,6 +9,7 @@ import productsRoute from  './routes/productsRoute'
 import dataSource from './app-data-source'
 import ProductImporter from './config/productImporter'
 import BlogImporter from './config/blogImporter'
+import CategoryImporter from './config/categoryImporter'
 
 
 dataSource
@@ -17,6 +18,7 @@ dataSource
     console.log('Data Source has been initialized!')
     await BlogImporter.loadAllBlogs()
     await ProductImporter.loadAllProducts()
+    await CategoryImporter.loadAllCategory()
    
   
   })
