@@ -2,6 +2,7 @@
 import Category from "../entities/Category"
 import Products from "../entities/Products"
 import HttpError from "../utils/HttpError"
+import Popular from "../entities/Popular";
 import { FindManyOptions, FindOptions } from "typeorm";
 
 class ProductsService{
@@ -50,6 +51,20 @@ class ProductsService{
             relations: { images: true }
         };
         return Products.find(options);
+    }
+
+    async getPopularProducts(): Promise<Products[]> {
+        
+        const popularProducts = await Products.find({
+            where: {
+                popular: true
+            },
+            relations: { images: true }
+
+        });
+
+        console.log(popularProducts)
+        return popularProducts;
     }
 
 

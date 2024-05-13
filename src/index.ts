@@ -17,8 +17,8 @@ dataSource
   .then( async() => {
     console.log('Data Source has been initialized!')
     await BlogImporter.loadAllBlogs()
-    await ProductImporter.loadAllProducts()
     await CategoryImporter.loadAllCategory()
+    await ProductImporter.loadAllProducts()
    
   
   })

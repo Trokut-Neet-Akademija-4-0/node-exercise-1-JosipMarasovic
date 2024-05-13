@@ -26,7 +26,7 @@ export default class BlogImporter {
           },
         });
 
-        if (alreadyImported) continue;
+        
 
         const filePath = path.join(process.env.IMPORTS_FOLDER_PATH, fileName);
         const jsonContent = await fs.promises.readFile(filePath, 'utf-8');

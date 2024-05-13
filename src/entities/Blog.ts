@@ -9,7 +9,7 @@ export  default class Blog  extends BaseEntity{
   @Column("character varying", { name: "title", nullable: true, length: 60 })
   title!: string | null;
 
-  @Column("character varying", { name: "content", nullable: true, length: 255 })
+  @Column("text", { name: "content", nullable: true })
   content!: string | null;
 
   @Column("character varying", { name: "images", nullable: true, length: 255 })

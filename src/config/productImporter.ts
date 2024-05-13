@@ -32,7 +32,7 @@ export default class ProductImporter {
           },
         });
 
-        if (alreadyImported) continue;
+        
 
         const parser = await fs
           .createReadStream(
@@ -71,7 +71,7 @@ export default class ProductImporter {
     product.discountPercentage = Number.parseInt(record[3]); 
     product.quantity = Number.parseInt(record[4]) ; 
     product.thumbnail = record[5];
-    product.popular = record[6] === 'yes'; 
+    product.popular = record[6].toLowerCase() === 'true';
     const categoryId: number = parseInt(record[7]);
     const category = await Category.findOne({ where: { categoryId } });
   
