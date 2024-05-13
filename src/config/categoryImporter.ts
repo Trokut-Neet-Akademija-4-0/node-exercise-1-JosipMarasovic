@@ -1,10 +1,10 @@
 import fs from 'fs';
 import { parse } from 'csv';
 import path from 'path';
-import Blog from '../entities/Blog';
+import Category from '../entities/Category';
 import FileImportTracker from '../entities/FileImportTracker';
 
-export default class BlogImporter {
+export default class CategoryImporter {
   static async loadAllBlogs(): Promise<void> {
     if (!process.env.IMPORTS_FOLDER_PATH) {
       console.log('Import folder path not specified.');
@@ -43,8 +43,8 @@ export default class BlogImporter {
           );
 
         for await (const record of parser) {
-          const blog = BlogImporter.convertCSVRecordToBlogEntity(record);
-          await blog.save();
+          const category = CategoryImporter.convertCSVRecordToBlogEntity(record);
+          await category.save();
         }
 
         const importTracker = new FileImportTracker();
@@ -58,10 +58,9 @@ export default class BlogImporter {
     }
   }
 
-  private static convertCSVRecordToBlogEntity(record: string[]): Blog {
-    const blog = new Blog();
-    blog.title = record[0];
-    blog.content = record[1];
-    return blog;
+  private static convertCSVRecordToBlogEntity(record: string[]): Category {
+    const category = new Category();
+    category.categoryname = record[0];
+    return category;
   }
 }
