@@ -13,11 +13,11 @@ const getProductById = async  (req: Request, res: Response) => {
     res.send(await productsService.getProductById(productId));
 }
 
-
-const getCategoryProductsByName = async (req: Request, res: Response) => {
-    const categoryName = req.params.categoryName;
-    res.send(await productsService.getProductsByCategoryName(categoryName))
+const getCategoryProductsById = async (req: Request, res: Response) => {
+    const categoryId = parseInt(req.params.categoryId, 10);
+    res.send(await productsService.getProductsByCategoryId(categoryId));
 }
+
 
 const getPopularProducts = async (req: Request, res: Response) =>{
     res.send(await productsService.getPopularProducts())
@@ -26,7 +26,7 @@ const getPopularProducts = async (req: Request, res: Response) =>{
 export{
     getAllProducts,
     getProductById,
-    getCategoryProductsByName,
-    getPopularProducts
+    getPopularProducts,
+    getCategoryProductsById
   
 }

@@ -33,25 +33,14 @@ class ProductsService{
     }
 
    
-    async getCategoryByName(categoryName: string): Promise<Category | null> {
-        return Category.findOne({ where: { categoryname: categoryName } });
-    }
-
-    async getProductsByCategoryName(categoryName: string): Promise<Products[]> {
-        const category = await this.getCategoryByName(categoryName);
-        if (!category) {
-            throw new Error(`Category with name '${categoryName}' not found`);
-        }
-        return this.getProductsByCategory(category.categoryId);
-    }
-
-    async getProductsByCategory(categoryId: number): Promise<Products[]> {
+    async getProductsByCategoryId(categoryId: number): Promise<Products[]> {
         const options: FindManyOptions<Products> = {
             where: { category: { categoryId } },
             relations: { images: true }
         };
         return Products.find(options);
     }
+   
 
     async getPopularProducts(): Promise<Products[]> {
         

@@ -25,6 +25,7 @@ export default class BlogImporter {
             name: fileName,
           },
         });
+        //if (alreadyImported) continue;
 
         
 
@@ -52,6 +53,7 @@ export default class BlogImporter {
     const blog = new Blog();
     blog.title = jsonData.title;
     blog.content = jsonData.content;
+    blog.images = jsonData.images
     return blog;
   }
 }
