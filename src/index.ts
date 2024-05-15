@@ -10,6 +10,7 @@ import dataSource from './app-data-source'
 import ProductImporter from './config/productImporter'
 import BlogImporter from './config/blogImporter'
 import CategoryImporter from './config/categoryImporter'
+import path from 'path'
 
 
 dataSource
@@ -30,6 +31,8 @@ dataSource
 
 const app: Express = express()
 const port = process.env.PORT || 3000
+
+app.use('/images', express.static(path.join(__dirname, '../images')));
 
 app.use(express.json())
 app.use(errorHandler)

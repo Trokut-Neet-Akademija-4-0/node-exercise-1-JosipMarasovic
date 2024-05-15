@@ -26,19 +26,6 @@ class BlogService {
             return foundBlog   
     }
 
-    async deleteBlogById(id:number) :Promise<Blog> {
-        const blog = await this.getBlogById(id)
-        return blog.remove()
-    }
-
-    async getBlogPictureById() : Promise<Blog>{
-        return new Blog
-    }
-
-    async deleteBlogPictureById() : Promise<Blog>{
-
-        return new Blog
-    }   
 }
 
 export default new BlogService() 

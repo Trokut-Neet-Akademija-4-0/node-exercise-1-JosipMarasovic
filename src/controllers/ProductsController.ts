@@ -18,11 +18,31 @@ const getProductById = async (req: Request, res: Response, next: NextFunction) =
     try {
         const productId = parseInt(req.params.id, 10);
         const product = await productsService.getProductById(productId);
-        res.json(product);
+        const baseURL = `${req.protocol}://${req.get('host')}/images/products/${product.productId}/`;
+        const productResponse = {
+            ...product,
+            images: product.images.map(image => ({
+                ...image,
+                imageUrl: `${baseURL}${image.imageUrl}`
+            }))
+        };
+
+        res.json(productResponse);
     } catch (error) {
         next(error);
     }
 };
+
+/*const getProductById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const productId = parseInt(req.params.id, 10);
+        const product = await productsService.getProductById(productId);
+        
+        res.json(product);
+    } catch (error) {
+        next(error);
+    }
+};*/
 
 const getCategoryProductsById = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -53,31 +73,7 @@ const getPopularProductsByCategoryId = async (req: Request, res: Response, next:
     }
 };
 
-/*const getAllProducts = async (req: Request, res: Response) => {
-    res.send(await productsService.getAllProducts())
-}
 
-const getProductById = async  (req: Request, res: Response) => {
-    const productId = parseInt(req.params.id, 10); 
-    res.send(await productsService.getProductById(productId));
-}
-
-const getCategoryProductsById = async (req: Request, res: Response) => {
-    const categoryId = parseInt(req.params.categoryId, 10);
-    res.send(await productsService.getProductsByCategoryId(categoryId));
-}
-
-
-const getPopularProducts = async (req: Request, res: Response) =>{
-    res.send(await productsService.getPopularProducts())
-}
-
-
-const getPopularProductsByCategoryId = async (req: Request, res: Response) => {
-    const categoryId = parseInt(req.params.categoryId,10)
-
-    res.send(await productsService.getPopularProductsByCategoryId(categoryId))
-}*/
 
 export{
     getAllProducts,

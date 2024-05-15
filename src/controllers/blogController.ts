@@ -16,30 +16,8 @@ const getBlogById =  async (req: Request, res: Response) => {
    )
 }
 
-const deleteBlogById = async( req :Request,res : Response) => {
-    res.send(
-        await blogService.deleteBlogById(Number.parseInt(req.params.id, 10))
-    )
-}
-
-const getBlogPictureById = async( req :Request,res : Response) => {
-
-}
-
-const deleteBlogPictureById = async( req :Request,res : Response) => {
-    
-}
-
-
-
-
-
-
-
 export {
     getBlogById,
-    deleteBlogById,
-    getBlogPictureById,
     getAllBlogs
    
 }
