@@ -56,6 +56,21 @@ class ProductsService{
         return popularProducts;
     }
 
+    async getPopularProductsByCategoryId(categoryId: number): Promise<Products[]> {
+        const options: FindManyOptions<Products> = {
+            where: {
+                category: { categoryId },
+                popular: true
+            },
+            relations: { images: true }
+        };
+        const popularProducts = await Products.find(options);
+        if (!popularProducts.length) {
+            throw new HttpError(404, `No popular products found for category with id ${categoryId}`);
+        }
+        return popularProducts;
+    }
+
 
 
 }
