@@ -22,10 +22,10 @@ export  default class Products  extends BaseEntity{
   @Column("character varying", { name: "title", nullable: true, length: 60 })
   title!: string | null;
 
-  @Column("character varying", {
+  @Column("text", {
     name: "description",
     nullable: true,
-    length: 60,
+    
   })
   description!: string | null;
 

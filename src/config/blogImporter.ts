@@ -25,7 +25,7 @@ export default class BlogImporter {
             name: fileName,
           },
         });
-        //if (alreadyImported) continue;
+        if (alreadyImported) continue;
 
         
 
