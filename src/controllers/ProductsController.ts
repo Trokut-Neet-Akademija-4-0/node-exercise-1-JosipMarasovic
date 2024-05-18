@@ -1,5 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
 import productsService from '../services/productsService'
+import Images from '../entities/Images';
+import path from 'path';
+import fs from 'fs';
 
 
 
@@ -13,36 +16,65 @@ const getAllProducts = async (req: Request, res: Response, next: NextFunction) =
         next(error);
     }
 };
-
 const getProductById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const productId = parseInt(req.params.id, 10);
         const product = await productsService.getProductById(productId);
-        const baseURL = `${req.protocol}://${req.get('host')}/images/products/${product.productId}/`;
-        const productResponse = {
-            ...product,
-            images: product.images.map(image => ({
-                ...image,
-                imageUrl: `${baseURL}${image.imageUrl}`
-            }))
-        };
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
 
-        res.json(productResponse);
+        const imagesDirectory = path.join(__dirname, '../../images/products', product.productId.toString());
+        console.log('Checking images in directory:', imagesDirectory);
+
+        if (fs.existsSync(imagesDirectory)) {
+            const imageFiles = fs.readdirSync(imagesDirectory);
+            console.log('Found image files:', imageFiles);
+
+            const baseURL = `${req.protocol}://${req.get('host')}/images/products/${product.productId}/`;
+            console.log('Base URL for images:', baseURL);
+
+            const updatedImages = imageFiles.map(fileName => {
+                const image = new Images();
+                image.imageId = fileName;
+                image.imageUrl = `${baseURL}${fileName}`;
+                return image;
+            });
+
+            product.images = updatedImages as Images[];
+        } else {
+            console.log('No images directory found for product:', product.productId);
+        }
+
+       
+        const productWithoutCircularReference = JSON.parse(JSON.stringify(product, (key, value) => {
+            if (key === 'product') {
+                return undefined; 
+            }
+            return value;
+        }));
+
+        console.log('Product with updated images:', productWithoutCircularReference);
+
+        res.json(productWithoutCircularReference);
     } catch (error) {
         next(error);
     }
 };
 
-/*const getProductById = async (req: Request, res: Response, next: NextFunction) => {
+ 
+
+
+
+const getCategories = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const productId = parseInt(req.params.id, 10);
-        const product = await productsService.getProductById(productId);
-        
-        res.json(product);
-    } catch (error) {
+        const categories = await productsService.getCategories();
+        return res.json(categories);
+      } catch (error) {
         next(error);
-    }
-};*/
+      }
+
+}
 
 const getCategoryProductsById = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -80,6 +112,7 @@ export{
     getProductById,
     getPopularProducts,
     getCategoryProductsById,
-    getPopularProductsByCategoryId
+    getPopularProductsByCategoryId,
+    getCategories
   
 }
