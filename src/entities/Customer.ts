@@ -12,7 +12,7 @@ import  Basket from "./Basket";
 @Entity("Customer", { schema: "public" })
 export  default class Customer  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "customer_id" })
-  customerId!: string;
+  customerId!: number;
 
   @Column("character varying", { name: "name", nullable: true, length: 60 })
   name!: string | null;
@@ -30,7 +30,7 @@ export  default class Customer  extends BaseEntity{
   city!: string | null;
 
   @Column("bigint", { name: "zipCode", nullable: true })
-  zipCode!: string | null;
+  zipCode!: number | null;
 
   @Column("text", { name: "deliveryInstructions", nullable: true })
   deliveryInstructions!: string | null;

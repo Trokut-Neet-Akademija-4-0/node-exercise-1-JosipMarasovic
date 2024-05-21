@@ -1,106 +1,65 @@
+// services/cartService.ts
 
-import CartProduct from "../models/cartProductModel"
-import HttpError from "../utils/HttpError"
-import ICart from "../models/interfaces/cartInterface"
-import userCart from '../models/cartModel'
+import Customer from "../entities/Customer";
+import Basket from "../entities/Basket";
+import Products from "../entities/Products";
 
-
-class CartService {
-    private cart: ICart = userCart
-
-  getCart(): ICart {
-    return this.cart
-  }
-
- /* addProductById(id: number): ICart {
-    this.changeProductQuantity(id, 1)
-    this.updateCartInformation()
-    return this.cart
-  }*/
-
-  deleteProductById(id: number): ICart {
-    const indexToDelete = this.getCartProductIndexByProductId(id)
-
-    if (indexToDelete < 0)
-      throw new HttpError(404, `Cart product with id ${id} not found`)
-
-    this.cart.products.splice(indexToDelete, 1)
-    this.updateCartInformation()
-    return this.cart
-  }
-
-  
-  clearCart(): ICart {
-    this.cart.products = []
-    this.updateCartInformation()
-    return this.cart
-  }
-
-  /*changeProductQuantity(productId: number, quantityModifier: number): void {
-    const product = productDetailServices.getProductById(productId)
-
-    try {
-      const existingCartProduct = this.getCartProductByProductId(product.id)
-      if (existingCartProduct.quantity + quantityModifier > 0)
-        existingCartProduct.quantity += quantityModifier
-      else this.deleteProductById(existingCartProduct.id)
-    } catch (error) {
-      if (error instanceof HttpError)
-        this.cart.products.push(
-          new CartProduct(
-            this.getNextAvailableCartProductId(),
-            product,
-            quantityModifier,
-          ),
-        )
-    }
-  }*/
-
-  getCartProductByProductId(id: number): CartProduct {
-    const foundCartProduct = this.cart.products.find(
-      (cartProduct) => cartProduct.product.id === id,
-    )
-    if (!foundCartProduct)
-      throw new HttpError(404, `Cart product with product id ${id} not found`)
-    return foundCartProduct
-  }
-
-  getCartProductIndexByProductId(id: number): number {
-    const cartProductIndex = this.cart.products.findIndex(
-      (cartProduct) => cartProduct.product.id === id,
-    )
-    if (cartProductIndex < 0)
-      throw new HttpError(404, `Cart product with product id ${id} not found`)
-    return cartProductIndex
-  }
-
-  getNextAvailableCartProductId(): number {
-    let greatestId = 0
-    this.cart.products.forEach((cartProduct) => {
-      greatestId = cartProduct.id > greatestId ? cartProduct.id : greatestId
-    })
-    return greatestId + 1
-  }
-
-  updateCartInformation() {
-    let totalQuantity = 0
-    let total = 0
-    let totalDiscounted = 0
-    this.cart.products.forEach((cartProduct) => {
-      const totalProductPrice = cartProduct.quantity * cartProduct.product.price
-      total += totalProductPrice
-      totalDiscounted +=
-        totalProductPrice -
-        totalProductPrice * (cartProduct.product.discountPercentage / 100)
-      totalQuantity += cartProduct.quantity
-    })
-
-    this.cart.total = total
-    this.cart.discountedTotal = totalDiscounted
-    this.cart.totalProducts = this.cart.products.length
-    this.cart.totalQuantity = totalQuantity
-  }
-
+interface CustomerData {
+  name: string;
+  lastName: string;
+  email: string;
+  address: string;
+  city: string;
+  zipCode: number;
+  deliveryInstructions?: string;
 }
 
-export default new CartService()
+class CartService {
+  async createCustomerIfNotExist(customerData: CustomerData) {
+    let customer = await Customer.findOne({ where: { email: customerData.email } });
+    if (!customer) {
+      customer = Customer.create(customerData);
+      await customer.save();
+    }
+    return customer;
+  }
+
+  async createCustomerAndAddToCart(customerData: CustomerData, productId: number, quantity: number) {
+    const customer = await this.createCustomerIfNotExist(customerData);
+    return this.addItemToCart(customer.customerId, productId, quantity);
+  }
+
+  async getCartItems(customerId: number) {
+    return await Basket.find({ where: { customer: { customerId } }, relations: ['product'] });
+  }
+
+  async addItemToCart(customerId: number, productId: number, quantity: number) {
+    let basket = await Basket.findOne({ where: { customer: { customerId }, product: { productId } } });
+    if (basket) {
+      basket.quantity = (basket.quantity || 0) + quantity;
+    } else {
+      const product = await Products.findOne({ where: { productId } });
+      const customer = await Customer.findOne({ where: { customerId } });
+      if (!product || !customer) {
+        throw new Error("Product or Customer not found");
+      }
+      basket = Basket.create({ customer, product, quantity, price: product.price });
+    }
+    return await basket.save();
+  }
+
+  async removeProductFromCart(customerId: number, productId: number) {
+    const basket = await Basket.findOne({ where: { customer: { customerId }, product: { productId } } });
+    if (basket) {
+      await Basket.remove(basket);
+    }
+    return this.getCartItems(customerId);
+  }
+
+  async clearCart(customerId: number) {
+    const baskets = await Basket.find({ where: { customer: { customerId } } });
+    await Basket.remove(baskets);
+  }
+}
+
+export default new CartService();

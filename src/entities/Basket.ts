@@ -15,22 +15,22 @@ import  Products  from "./Products";
 @Entity("Basket", { schema: "public" })
 export  default class Basket  extends BaseEntity{
   @PrimaryGeneratedColumn({ type: "bigint", name: "basket_id" })
-  basketId!: string;
+  basketId!: number;
 
   @Column("bigint", { name: "price", nullable: true })
-  price!: string | null;
+  price!: number | null;
 
   @Column("bigint", { name: "quantity", nullable: true })
-  quantity!: string | null;
+  quantity!: number | null;
 
   @Column("bigint", { name: "discount_percentage", nullable: true })
-  discountPercentage!: string | null;
+  discountPercentage!: number | null;
 
   @Column("bigint", { name: "discount_amount", nullable: true })
-  discountAmount!: string | null;
+  discountAmount!: number | null;
 
   @Column("bigint", { name: "price_with_discount", nullable: true })
-  priceWithDiscount!: string | null;
+  priceWithDiscount!: number | null;
 
   @ManyToOne(() => Customer, (customer) => customer.baskets)
   @JoinColumn([{ name: "customer_id", referencedColumnName: "customerId" }])
